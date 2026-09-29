@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@aip/ai-core": ["./packages/ai-core/src/index.ts"],
+      "@aip/policy-engine": ["./packages/policy-engine/src/index.ts"],
+      "@aip/memory-engine": ["./packages/memory-engine/src/index.ts"],
+      "@aip/notification-engine": ["./packages/notification-engine/src/index.ts"],
+      "@aip/opportunity-engine": ["./packages/opportunity-engine/src/index.ts"],
+      "@aip/communication-engine": ["./packages/communication-engine/src/index.ts"],
+      "@aip/shared-types": ["./packages/shared-types/src/index.ts"],
+      "@aip/shared-utils": ["./packages/shared-utils/src/index.ts"],
+      "@aip/security": ["./packages/security/src/index.ts"],
+      "@aip/logger": ["./packages/logger/src/index.ts"]
+    }
+  }
+}

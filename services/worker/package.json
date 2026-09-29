@@ -1,0 +1,28 @@
+{
+  "name": "@aip/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "tsx watch src/worker.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@aip/logger": "workspace:*",
+    "@aip/shared-types": "workspace:*",
+    "bullmq": "^5.41.0",
+    "dotenv": "^16.4.7",
+    "ioredis": "^5.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.19",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}

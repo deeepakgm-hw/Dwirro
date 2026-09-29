@@ -1,0 +1,41 @@
+# Centralized Code Ownership
+
+# PERSON A
+services/api/src/modules/auth/ @personA
+services/api/src/modules/users/ @personA
+services/api/src/modules/approvals/ @personA
+services/api/src/modules/agent/ @personA
+services/api/src/modules/memory/ @personA
+services/api/src/modules/integrations/ @personA
+services/api/src/modules/reports/ @personA
+services/api/src/modules/audit/ @personA
+services/api/src/auth/ @personA
+services/api/src/realtime/ @personA
+packages/ai-core/ @personA
+packages/policy-engine/ @personA
+packages/memory-engine/ @personA
+packages/security/ @personA
+
+# PERSON B
+services/api/src/modules/tasks/ @personB
+services/api/src/modules/reminders/ @personB
+services/api/src/modules/calendar/ @personB
+services/api/src/modules/emails/ @personB
+services/api/src/modules/notifications/ @personB
+services/api/src/modules/opportunities/ @personB
+services/api/src/modules/exams/ @personB
+services/api/src/modules/bills/ @personB
+services/api/src/modules/communication/ @personB
+services/worker/ @personB
+packages/notification-engine/ @personB
+packages/opportunity-engine/ @personB
+packages/communication-engine/ @personB
+infra/ @personB
+
+# SHARED (both must review)
+prisma/schema.prisma @personA @personB
+packages/shared-types/ @personA @personB
+packages/shared-utils/ @personA @personB
+packages/logger/ @personA @personB
+.github/ @personA @personB
+docs/ @personA @personB
