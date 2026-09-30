@@ -29,5 +29,10 @@
     "prisma": "^6.4.1",
     "turbo": "^2.4.0",
     "typescript": "^5.7.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "rollup": "npm:@rollup/wasm-node@^4.34.8"
+    }
   }
 }
