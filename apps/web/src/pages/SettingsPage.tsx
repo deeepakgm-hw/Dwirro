@@ -5,13 +5,10 @@ import { maskSensitiveData } from '@aip/security';
 import {
   Settings,
   Shield,
-  Sliders,
   Eye,
   Trash2,
   DollarSign,
   Activity,
-  CheckCircle2,
-  XCircle,
   AlertTriangle,
   Lock,
 } from 'lucide-react';
@@ -35,9 +32,7 @@ export const SettingsPage: React.FC = () => {
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
   // Redaction Live Studio State
-  const [sampleUnredactedText, setSampleUnredactedText] = useState(
-    'Please charge credit card 4532-8921-9012-3456 and verify 2FA code: 891234. Password: SuperSecret123!'
-  );
+  const [sampleUnredactedText, setSampleUnredactedText] = useState('');
 
   const handleLevelChange = (actionId: string, newLevel: ActionLevel) => {
     const result = policyEngine.updateActionLevel(actionId, newLevel);
@@ -184,6 +179,8 @@ export const SettingsPage: React.FC = () => {
               <label className="block text-xs font-semibold text-slate-300 mb-1">Raw User Input (Simulated):</label>
               <textarea
                 rows={2}
+                data-testid="redaction-input"
+                placeholder="Type sample text with account numbers or codes to preview instant local masking..."
                 value={sampleUnredactedText}
                 onChange={(e) => setSampleUnredactedText(e.target.value)}
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 font-mono"

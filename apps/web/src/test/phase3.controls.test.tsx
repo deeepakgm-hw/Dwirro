@@ -1,12 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AuthProvider } from '../context/AuthContext';
 import { SystemProvider, useSystem } from '../context/SystemContext';
 import { Navbar } from '../components/Navbar';
 import { ApprovalCard } from '../components/ApprovalCard';
-import { ApprovalAction } from '@aip/shared-types';
 
 const MockControlsDashboard: React.FC = () => {
   const { approvalActions } = useSystem();

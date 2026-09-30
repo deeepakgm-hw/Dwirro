@@ -4,15 +4,15 @@ services:
     container_name: aip-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: aip_user
-      POSTGRES_PASSWORD: aip_password
-      POSTGRES_DB: aip_db
+      POSTGRES_USER: ${POSTGRES_USER:-dwirro_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-dwirro_db}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U aip_user -d aip_db"]
+      test: ["CMD-SHELL", "pg_isready"]
       interval: 5s
       timeout: 5s
       retries: 5

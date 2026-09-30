@@ -4,14 +4,10 @@ import {
   PhoneCall,
   PhoneIncoming,
   PhoneOff,
-  Mic,
   Volume2,
-  ShieldAlert,
   ShieldCheck,
   MessageSquare,
   Radio,
-  Clock,
-  Sparkles,
   Check,
 } from 'lucide-react';
 

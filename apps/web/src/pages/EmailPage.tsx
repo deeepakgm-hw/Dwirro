@@ -8,10 +8,8 @@ import {
   Send,
   RotateCcw,
   Clock,
-  ExternalLink,
   CheckCircle2,
   RefreshCw,
-  Search,
 } from 'lucide-react';
 
 export const EmailPage: React.FC = () => {

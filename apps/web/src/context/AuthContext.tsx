@@ -84,7 +84,7 @@ export const AuthProvider: React.FC<{ children: ReactNode; initialAuthenticated?
     }
 
     // Mock validation: does not reveal which field was wrong
-    if (email.trim().toLowerCase() === 'user@dwirro.ai' && password === 'CorrectPassword123!') {
+    if (email.trim().toLowerCase() === 'user@dwirro.ai' && password === 'mock-auth-pass') {
       setSession((prev: UserSession) => ({
         ...prev,
         email: email.trim().toLowerCase(),
@@ -163,7 +163,7 @@ export const AuthProvider: React.FC<{ children: ReactNode; initialAuthenticated?
   };
 
   const unlockSession = async (password: string): Promise<{ success: boolean; error?: string }> => {
-    if (password === 'CorrectPassword123!') {
+    if (password === 'mock-auth-pass') {
       setSession((prev: UserSession) => ({
         ...prev,
         isLocked: false,

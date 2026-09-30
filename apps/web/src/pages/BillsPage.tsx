@@ -3,16 +3,14 @@ import { useSystem } from '../context/SystemContext';
 import {
   Receipt,
   AlertTriangle,
-  Clock,
   ExternalLink,
   ShieldCheck,
   Plus,
   Bell,
-  ArrowRight,
 } from 'lucide-react';
 
 export const BillsPage: React.FC = () => {
-  const { bills, addBill, updateBillDueDate } = useSystem();
+  const { bills, addBill } = useSystem();
 
   const [payee, setPayee] = useState('');
   const [amount, setAmount] = useState('');
@@ -238,7 +236,7 @@ export const BillsPage: React.FC = () => {
                   id="sourceInput"
                   data-testid="bill-source-select"
                   value={source}
-                  onChange={(e) => setSource(e.target.value as any)}
+                  onChange={(e) => setSource(e.target.value as 'mail' | 'sms' | 'manual')}
                   className="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-cyan-500"
                 >
                   <option value="manual">Manual Entry</option>

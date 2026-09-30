@@ -10,14 +10,14 @@ const originalConsoleError = console.error;
 const originalConsoleWarn = console.warn;
 
 beforeEach(() => {
-  console.error = (...args: any[]) => {
+  console.error = (...args: unknown[]) => {
     // Ignore expected React test-library logging if intended
     const message = args.join(' ');
     if (message.includes('not wrapped in act')) return;
     originalConsoleError(...args);
     throw new Error(`Test failed due to unexpected console.error: ${message}`);
   };
-  console.warn = (...args: any[]) => {
+  console.warn = (...args: unknown[]) => {
     const message = args.join(' ');
     originalConsoleWarn(...args);
     throw new Error(`Test failed due to unexpected console.warn: ${message}`);

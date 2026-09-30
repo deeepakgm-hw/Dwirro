@@ -114,7 +114,7 @@ export const MonitorPage: React.FC = () => {
           <select
             data-testid="filter-provider"
             value={providerFilter}
-            onChange={(e) => setProviderFilter(e.target.value as any)}
+            onChange={(e) => setProviderFilter(e.target.value as 'all' | 'Claude' | 'GPT' | 'Antigravity')}
             className="bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
           >
             <option value="all">All Models</option>
@@ -127,7 +127,7 @@ export const MonitorPage: React.FC = () => {
           <select
             data-testid="filter-status"
             value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value as any)}
+            onChange={(e) => setStatusFilter(e.target.value as 'all' | 'completed' | 'running' | 'failed' | 'blocked')}
             className="bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
           >
             <option value="all">All Statuses</option>
