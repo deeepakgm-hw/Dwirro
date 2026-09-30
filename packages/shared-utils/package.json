@@ -1,16 +1,26 @@
 {
-  "name": "@aip/shared-utils",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint src --ext .ts"
-  },
-  "devDependencies": {
-    "typescript": "^5.7.3"
-  }
+    "name":  "@aip/shared-utils",
+    "version":  "0.1.0",
+    "private":  true,
+    "type":  "module",
+    "main":  "./dist/index.js",
+    "types":  "./dist/index.d.ts",
+    "scripts":  {
+                    "build":  "tsc",
+                    "typecheck":  "tsc --noEmit",
+                    "lint":  "eslint src --ext .ts"
+                },
+    "dependencies":  {
+                         "@aip/shared-types":  "workspace:*"
+                     },
+    "devDependencies":  {
+                            "typescript":  "^5.7.3"
+                        },
+    "exports":  {
+                    ".":  {
+                              "types":  "./dist/index.d.ts",
+                              "import":  "./dist/index.js",
+                              "default":  "./dist/index.js"
+                          }
+                }
 }

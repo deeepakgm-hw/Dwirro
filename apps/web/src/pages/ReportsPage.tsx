@@ -7,7 +7,6 @@ import {
   VolumeX,
   Download,
   Search,
-  Filter,
   ShieldAlert,
   CheckCircle2,
   Clock,
@@ -69,7 +68,7 @@ export const ReportsPage: React.FC = () => {
       { key: 'details' as const, label: 'Details' },
     ];
 
-    const csvContent = exportToSafeCsv(auditLogs as any, headers);
+    const csvContent = exportToSafeCsv(auditLogs as unknown as Array<Record<string, unknown>>, headers);
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');

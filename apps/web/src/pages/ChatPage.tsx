@@ -1,8 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSystem } from '../context/SystemContext';
 import { ApprovalCard } from '../components/ApprovalCard';
-import { escapeHtml, detectPromptInjection } from '@aip/security';
+import { detectPromptInjection } from '@aip/security';
 import { Send, Mic, MicOff, Volume2, VolumeX, Sparkles, AlertCircle } from 'lucide-react';
+
+interface ISpeechRecognitionEvent {
+  results: ArrayLike<ArrayLike<{ transcript: string }>>;
+}
+
+interface ISpeechRecognitionErrorEvent {
+  error: string;
+}
+
+interface ISpeechRecognitionInstance {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  onstart: (() => void) | null;
+  onresult: ((event: ISpeechRecognitionEvent) => void) | null;
+  onerror: ((event: ISpeechRecognitionErrorEvent) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+}
 
 export const ChatPage: React.FC = () => {
   const { chatMessages, sendMessage } = useSystem();
@@ -13,7 +33,7 @@ export const ChatPage: React.FC = () => {
   const [typing, setTyping] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<ISpeechRecognitionInstance | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -26,10 +46,11 @@ export const ChatPage: React.FC = () => {
   // Web Speech API: Recognition Setup
   const handleToggleSpeech = () => {
     setSpeechError(null);
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const SpeechConstructor =
+      (window as unknown as { SpeechRecognition?: new () => ISpeechRecognitionInstance; webkitSpeechRecognition?: new () => ISpeechRecognitionInstance }).SpeechRecognition ||
+      (window as unknown as { SpeechRecognition?: new () => ISpeechRecognitionInstance; webkitSpeechRecognition?: new () => ISpeechRecognitionInstance }).webkitSpeechRecognition;
 
-    if (!SpeechRecognition) {
+    if (!SpeechConstructor) {
       setSpeechError('Web Speech API is not supported in this browser environment.');
       return;
     }
@@ -41,20 +62,20 @@ export const ChatPage: React.FC = () => {
     }
 
     try {
-      const recognition = new SpeechRecognition();
+      const recognition = new SpeechConstructor();
       recognition.continuous = false;
       recognition.interimResults = true;
       recognition.lang = 'en-US';
 
       recognition.onstart = () => setIsListening(true);
-      recognition.onresult = (event: any) => {
+      recognition.onresult = (event: ISpeechRecognitionEvent) => {
         const transcript = Array.from(event.results)
-          .map((result: any) => result[0].transcript)
+          .map((result) => result[0]?.transcript || '')
           .join('');
         // Transcript placed in the input for confirmation before sending
         setInputText(transcript);
       };
-      recognition.onerror = (event: any) => {
+      recognition.onerror = (event: ISpeechRecognitionErrorEvent) => {
         setIsListening(false);
         setSpeechError(`Microphone access error: ${event.error || 'Permission denied'}`);
       };
@@ -62,9 +83,10 @@ export const ChatPage: React.FC = () => {
 
       recognitionRef.current = recognition;
       recognition.start();
-    } catch (err: any) {
+    } catch (err: unknown) {
       setIsListening(false);
-      setSpeechError(`Microphone error: ${err.message || 'Could not start recording'}`);
+      const errMsg = err instanceof Error ? err.message : 'Could not start recording';
+      setSpeechError(`Microphone error: ${errMsg}`);
     }
   };
 

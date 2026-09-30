@@ -1,9 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { AuthProvider, useAuth } from '../context/AuthContext';
-import { LoginPage } from '../pages/LoginPage';
+import { AuthProvider } from '../context/AuthContext';
 import { ProtectedRoute } from '../components/ProtectedRoute';
 import { LockScreenModal } from '../components/LockScreenModal';
 
@@ -41,7 +40,7 @@ describe('PHASE 2: Authentication, 2FA, and Session Security', () => {
     await user.clear(emailInput);
     await user.type(emailInput, 'user@dwirro.ai');
     await user.clear(passwordInput);
-    await user.type(passwordInput, 'WrongPassword123!');
+    await user.type(passwordInput, 'incorrect-test-pass');
     await user.click(submitBtn);
 
     const errorBanner = await screen.findByTestId('auth-error-banner');
@@ -56,7 +55,7 @@ describe('PHASE 2: Authentication, 2FA, and Session Security', () => {
 
     // Enter correct initial credentials
     await user.type(screen.getByTestId('login-email-input'), 'user@dwirro.ai');
-    await user.type(screen.getByTestId('login-password-input'), 'CorrectPassword123!');
+    await user.type(screen.getByTestId('login-password-input'), 'mock-auth-pass');
     await user.click(screen.getByTestId('login-submit-btn'));
 
     // Should now see 2FA code input
@@ -84,7 +83,7 @@ describe('PHASE 2: Authentication, 2FA, and Session Security', () => {
     render(<TestApp initialAuth={false} />);
 
     await user.type(screen.getByTestId('login-email-input'), 'user@dwirro.ai');
-    await user.type(screen.getByTestId('login-password-input'), 'SuperSecretPassword!');
+    await user.type(screen.getByTestId('login-password-input'), 'test-dummy-pass');
     await user.click(screen.getByTestId('login-submit-btn'));
 
     // Check localStorage & sessionStorage
@@ -92,8 +91,8 @@ describe('PHASE 2: Authentication, 2FA, and Session Security', () => {
     expect(localStorage.getItem('code')).toBeNull();
     expect(sessionStorage.getItem('password')).toBeNull();
     expect(sessionStorage.getItem('code')).toBeNull();
-    expect(JSON.stringify(localStorage)).not.toContain('SuperSecretPassword!');
-    expect(JSON.stringify(sessionStorage)).not.toContain('SuperSecretPassword!');
+    expect(JSON.stringify(localStorage)).not.toContain('test-dummy-pass');
+    expect(JSON.stringify(sessionStorage)).not.toContain('test-dummy-pass');
   });
 
   it('Successful 2FA logs the user in to protected content', async () => {
@@ -101,7 +100,7 @@ describe('PHASE 2: Authentication, 2FA, and Session Security', () => {
     render(<TestApp initialAuth={false} />);
 
     await user.type(screen.getByTestId('login-email-input'), 'user@dwirro.ai');
-    await user.type(screen.getByTestId('login-password-input'), 'CorrectPassword123!');
+    await user.type(screen.getByTestId('login-password-input'), 'mock-auth-pass');
     await user.click(screen.getByTestId('login-submit-btn'));
 
     const codeInput = await screen.findByTestId('2fa-code-input');

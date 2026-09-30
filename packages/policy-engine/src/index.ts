@@ -1,4 +1,4 @@
-import { ActionLevel, ActionDefinition, AuditLogEntry } from '@aip/shared-types';
+import { ActionDefinition, ActionLevel } from '@aip/shared-types';
 
 export const ACTION_LEVEL_DESCRIPTIONS: Record<ActionLevel, { label: string; badgeColor: string; description: string }> = {
   L0: {

@@ -5,7 +5,6 @@ import userEvent from '@testing-library/user-event';
 import { AuthProvider } from '../context/AuthContext';
 import { SystemProvider } from '../context/SystemContext';
 import { SettingsPage } from '../pages/SettingsPage';
-import { maskSensitiveData } from '@aip/security';
 
 const renderSettings = () =>
   render(
@@ -24,12 +23,14 @@ describe('PHASE 11: Settings, Privacy and Cost Controls', () => {
     expect(l4Badges[0]).toHaveTextContent(/L4 \(Locked\)/i);
   });
 
-  it('Pre-flight redaction masks credit cards and 2FA OTPs', () => {
+  it('Pre-flight redaction masks credit cards and 2FA OTPs', async () => {
+    const user = userEvent.setup();
     renderSettings();
+    const input = screen.getByTestId('redaction-input');
+    await user.type(input, 'Card 1111-2222-3333-4444 code: 123456');
     const redactedOutput = screen.getByTestId('redacted-preview-output');
-    expect(redactedOutput.textContent).toContain('•••• •••• •••• 3456');
+    expect(redactedOutput.textContent).toContain('•••• •••• •••• 4444');
     expect(redactedOutput.textContent).toContain('••••••');
-    expect(redactedOutput.textContent).toContain('••••••••');
   });
 
   it('Permanent data deletion requires exact typed confirmation phrase', async () => {

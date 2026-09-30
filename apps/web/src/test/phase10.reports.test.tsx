@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { AuthProvider } from '../context/AuthContext';
 import { SystemProvider } from '../context/SystemContext';
 import { ReportsPage } from '../pages/ReportsPage';
-import { sanitizeCsvField, exportToSafeCsv } from '@aip/security';
+import { sanitizeCsvField } from '@aip/security';
 
 const renderReports = () =>
   render(

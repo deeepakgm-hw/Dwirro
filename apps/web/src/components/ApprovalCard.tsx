@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ApprovalAction } from '@aip/shared-types';
 import { ACTION_LEVEL_DESCRIPTIONS } from '@aip/policy-engine';
 import { useSystem } from '../context/SystemContext';
-import { AlertCircle, CheckCircle2, Clock, XCircle, RotateCcw, ShieldAlert, Check } from 'lucide-react';
+import { CheckCircle2, Clock, XCircle, RotateCcw, ShieldAlert, Check } from 'lucide-react';
 
 interface ApprovalCardProps {
   action: ApprovalAction;

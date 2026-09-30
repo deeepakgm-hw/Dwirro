@@ -290,7 +290,7 @@ export const TodayPage: React.FC = () => {
             <div className="flex items-center gap-2">
               <select
                 value={newTaskPriority}
-                onChange={(e) => setNewTaskPriority(e.target.value as any)}
+                onChange={(e) => setNewTaskPriority(e.target.value as 'low' | 'medium' | 'high' | 'urgent')}
                 className="bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-cyan-500 flex-1"
               >
                 <option value="low">Low Priority</option>

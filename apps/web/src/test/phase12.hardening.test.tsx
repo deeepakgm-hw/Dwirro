@@ -28,7 +28,7 @@ describe('PHASE 12: Hardening & End-to-End Regression Verification', () => {
 
     // 2. Sign In
     await user.type(screen.getByTestId('login-email-input'), 'user@dwirro.ai');
-    await user.type(screen.getByTestId('login-password-input'), 'CorrectPassword123!');
+    await user.type(screen.getByTestId('login-password-input'), 'mock-auth-pass');
     await user.click(screen.getByTestId('login-submit-btn'));
     const codeInput = await screen.findByTestId('2fa-code-input');
     await user.type(codeInput, '123456');
