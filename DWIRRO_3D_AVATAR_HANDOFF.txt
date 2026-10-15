@@ -1,0 +1,137 @@
+Dwirro 3D Avatar Handoff
+Date: 2026-10-14
+
+Current status
+--------------
+No 3D mascot implementation has been committed yet. The work so far was repository inspection and dependency planning.
+
+What was inspected
+------------------
+1. The pasted prompt requested a real custom 3D Dwirro mascot integrated into the existing app, not a mockup or static image.
+2. The repository is a pnpm monorepo at:
+   C:\PW Earners\WEB DEV & Coding\HTML\Personal Assistant\ai-personal-platform
+3. Root package:
+   - packageManager: pnpm@12.8.1
+   - scripts include dev:web, build, lint, typecheck, test
+   - turbo version is ^2.4.0
+4. Architecture document read:
+   - docs\architecture.md
+   - No DWIRRO_ARCHITECTURE.md exists in this checkout. The closest architecture file is docs\architecture.md.
+5. Web app:
+   - apps\web is a React 18 + Vite + TypeScript app.
+   - Main chat screen is apps\web\src\pages\ChatPage.tsx.
+   - App shell is apps\web\src\App.tsx.
+   - Shared app state is apps\web\src\context\SystemContext.tsx.
+6. Existing chat/voice behavior:
+   - ChatPage uses Web Speech API for speech recognition and speech synthesis.
+   - sendMessage is mocked in SystemContext and returns an assistant reply after a short timeout.
+   - Existing tests for chat are in apps\web\src\test\phase4.chat.test.tsx.
+7. Existing avatar/character protocol:
+   - No existing avatar runtime was found.
+   - No character-protocol package was found.
+   - No agent.state event implementation was found.
+   - Therefore, the correct next step is to create a frontend avatar-state adapter/interface rather than pretending backend protocol integration exists.
+8. Existing 3D dependencies:
+   - three is not installed.
+   - @react-three/fiber is not installed.
+   - @react-three/drei is not installed.
+
+Attempted command before interruption
+-------------------------------------
+The following install was started:
+
+pnpm --filter @aip/web add three @react-three/fiber @react-three/drei
+
+It was still downloading packages when the turn was interrupted. After interruption, apps\web\package.json was checked and the dependencies were not present, so the install likely did not complete.
+
+Important environment note
+--------------------------
+The normal sandboxed command runner failed with:
+
+helper_unknown_error: setup refresh had errors
+
+Commands had to be run with escalation outside the broken sandbox. This may still be necessary in the next continuation.
+
+Recommended continuation plan
+-----------------------------
+1. Install web dependencies:
+   pnpm --filter @aip/web add three @react-three/fiber @react-three/drei
+
+2. Add avatar files under apps\web\src\components\avatar\:
+   - DwirroMaterials.ts
+   - DwirroFace.tsx
+   - DwirroAnimations.ts
+   - DwirroAvatar.tsx
+   - DwirroScene.tsx
+   - characterState.ts
+
+3. Build the mascot as real Three.js geometry:
+   - midnight navy compact body, approx #10254B
+   - deep royal blue secondary material, approx #1C3F78
+   - electric cyan accents, approx #19BFFF
+   - white square emissive eyes
+   - asymmetric slanted visor
+   - rounded side pods with cyan rings
+   - integrated short legs
+   - subtle D-shaped side accent
+
+4. Add a lightweight frontend state adapter:
+   - idle
+   - listening
+   - thinking
+   - speaking
+   - happy
+   - surprised
+   - away
+
+5. Integrate into apps\web\src\pages\ChatPage.tsx:
+   - show DwirroScene as primary visual focus above or beside messages
+   - map isListening to listening
+   - map typing to thinking
+   - map speech synthesis isSpeaking to speaking
+   - default to idle
+   - keep text input as the working fallback when voice is unavailable
+
+6. Keep tests compatible:
+   - preserve existing test ids:
+     - chat-input
+     - send-message-btn
+     - mic-button
+     - chat-messages-container
+   - add a stable test id for the avatar container, for example dwirro-avatar-scene
+   - provide a WebGL fallback so jsdom tests do not crash
+
+7. Verification to run after implementation:
+   pnpm --filter @aip/web typecheck
+   pnpm --filter @aip/web lint
+   pnpm --filter @aip/web test
+   pnpm --filter @aip/web build
+
+8. If browser testing is available, run:
+   pnpm --filter @aip/web dev
+   Then visually inspect the chat page and confirm:
+   - the character is centered and not clipped
+   - visor, eyes, side pods, cyan rings, and legs are visible
+   - idle/listening/thinking/speaking states transition visibly
+   - the UI still works without voice support
+
+Files read so far
+-----------------
+- package.json
+- apps\web\package.json
+- docs\architecture.md
+- apps\web\src\pages\ChatPage.tsx
+- apps\web\src\context\SystemContext.tsx
+- packages\shared-types\src\index.ts
+- apps\web\src\index.css
+- apps\web\src\test\phase4.chat.test.tsx
+- apps\web\src\App.tsx
+
+User-provided visual references
+-------------------------------
+- C:\Users\deepu\Downloads\Neon Blue Robot Turnaround Board.png
+- C:\Users\deepu\Downloads\Neon Blue Mascot Robot.png
+
+Design intent to preserve
+-------------------------
+The character should be a minimalist, cute, futuristic geometric mascot inspired by the images, but original to Dwirro. It should not use a flat image plane. It should be real 3D geometry with softly bevelled/matte materials, luminous square eyes, cyan rings, a slanted visor, and a compact silhouette.

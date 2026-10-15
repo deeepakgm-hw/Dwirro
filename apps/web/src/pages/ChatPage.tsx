@@ -3,6 +3,7 @@ import { useSystem } from '../context/SystemContext';
 import { ApprovalCard } from '../components/ApprovalCard';
 import { detectPromptInjection } from '@aip/security';
 import { Send, Mic, MicOff, Volume2, VolumeX, Sparkles, AlertCircle } from 'lucide-react';
+import { DwirroScene, DwirroState } from '../components/avatar';
 
 interface ISpeechRecognitionEvent {
   results: ArrayLike<ArrayLike<{ transcript: string }>>;
@@ -128,8 +129,22 @@ export const ChatPage: React.FC = () => {
     setInputText(chipText);
   };
 
+  const avatarState: DwirroState = isListening
+    ? 'listening'
+    : typing
+      ? 'thinking'
+      : isSpeaking
+        ? 'speaking'
+        : 'idle';
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col h-[calc(100vh-5rem)]">
+      {/* 3D Mascot Stage */}
+      <DwirroScene
+        state={avatarState}
+        className="w-full h-52 sm:h-60 md:h-68 mb-3 shrink-0"
+      />
+
       {/* Mic error notice */}
       {speechError && (
         <div

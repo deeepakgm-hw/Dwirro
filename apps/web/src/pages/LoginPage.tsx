@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Shield, KeyRound, ArrowRight, Lock, AlertCircle } from 'lucide-react';
+import { Shield, KeyRound, ArrowRight, Lock, AlertCircle, Sparkles } from 'lucide-react';
+import { DwirroScene } from '../components/avatar';
 
 export const LoginPage: React.FC = () => {
   const { session, login, verifyTwoFactor, loginWithOAuth } = useAuth();
@@ -37,11 +38,9 @@ export const LoginPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 text-slate-100">
       <div className="max-w-md w-full space-y-8 bg-slate-900/90 border border-slate-800 p-8 rounded-3xl shadow-2xl backdrop-blur-md">
-        {/* Brand Header */}
+        {/* Brand Header & Dwirro Mascot */}
         <div className="text-center">
-          <div className="w-14 h-14 bg-gradient-to-tr from-cyan-600 to-indigo-600 rounded-2xl flex items-center justify-center text-white mx-auto shadow-lg shadow-cyan-500/20 mb-3">
-            <Shield className="w-7 h-7 text-white" />
-          </div>
+          <DwirroScene state="idle" className="w-44 h-44 mx-auto mb-1 border-0 bg-transparent shadow-none" interactive={true} />
           <h2 className="text-2xl font-black tracking-tight text-slate-100">Dwirro Platform</h2>
           <p className="text-xs text-slate-400 mt-1">Autonomous AI Personal Assistant with Zero-Trust Security</p>
         </div>
@@ -97,6 +96,15 @@ export const LoginPage: React.FC = () => {
             >
               {loading ? 'Authenticating...' : 'Sign In with Password'}
               <ArrowRight className="w-4 h-4" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => loginWithOAuth('google')}
+              className="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700/80 border border-cyan-500/30 text-cyan-300 font-medium py-2.5 rounded-xl text-xs transition-all shadow-sm"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+              <span>1-Click Guest & Demo Access (Instant)</span>
             </button>
 
             {/* Divider */}
