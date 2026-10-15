@@ -17,7 +17,7 @@
     "@aip/shared-types": "workspace:*",
     "@fastify/cors": "^10.0.2",
     "@fastify/helmet": "^13.0.1",
-    "@prisma/client": "^6.4.1",
+    "@prisma/client": "^7.10.0",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
     "ioredis": "^5.5.0",
