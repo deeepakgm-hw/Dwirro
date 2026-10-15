@@ -286,6 +286,28 @@ importers:
         specifier: ^5.7.3
         version: 5.9.3
 
+  packages/avatar-runtime:
+    dependencies:
+      '@aip/character-protocol':
+        specifier: workspace:*
+        version: link:../character-protocol
+    devDependencies:
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(msw@2.15.0(@types/node@20.19.43)(typescript@5.9.3))(supports-color@7.2.0)(tsx@4.23.15)
+
+  packages/character-protocol:
+    devDependencies:
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(msw@2.15.0(@types/node@20.19.43)(typescript@5.9.3))(supports-color@7.2.0)(tsx@4.23.15)
+
   packages/communication-engine:
     devDependencies:
       typescript:
@@ -332,6 +354,9 @@ importers:
       typescript:
         specifier: ^5.7.3
         version: 5.9.3
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(msw@2.15.0(@types/node@20.19.43)(typescript@5.9.3))(supports-color@7.2.0)(tsx@4.23.15)
 
   packages/security:
     dependencies:
@@ -358,6 +383,33 @@ importers:
       typescript:
         specifier: ^5.7.3
         version: 5.9.3
+
+  packages/tools:
+    devDependencies:
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(msw@2.15.0(@types/node@20.19.43)(typescript@5.9.3))(supports-color@7.2.0)(tsx@4.23.15)
+
+  packages/voice-client:
+    devDependencies:
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(msw@2.15.0(@types/node@20.19.43)(typescript@5.9.3))(supports-color@7.2.0)(tsx@4.23.15)
+
+  packages/voice-engine:
+    devDependencies:
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(msw@2.15.0(@types/node@20.19.43)(typescript@5.9.3))(supports-color@7.2.0)(tsx@4.23.15)
 
   services/api:
     dependencies:
@@ -403,7 +455,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.0.5
-        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(supports-color@7.2.0)(tsx@4.23.15)
+        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(msw@2.15.0(@types/node@20.19.43)(typescript@5.9.3))(supports-color@7.2.0)(tsx@4.23.15)
 
   services/worker:
     dependencies:
@@ -434,7 +486,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^3.0.5
-        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(supports-color@7.2.0)(tsx@4.23.15)
+        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(msw@2.15.0(@types/node@20.19.43)(typescript@5.9.3))(supports-color@7.2.0)(tsx@4.23.15)
 
 packages:
 
@@ -3713,12 +3765,13 @@ snapshots:
       msw: 2.15.0(@types/node@20.19.43)(typescript@5.9.3)
       vite: 7.3.6(@types/node@20.19.43)(jiti@1.21.7)(tsx@4.23.15)
 
-  '@vitest/mocker@3.2.7(vite@7.3.6(@types/node@20.19.43)(jiti@2.7.0)(tsx@4.23.15))':
+  '@vitest/mocker@3.2.7(msw@2.15.0(@types/node@20.19.43)(typescript@5.9.3))(vite@7.3.6(@types/node@20.19.43)(jiti@2.7.0)(tsx@4.23.15))':
     dependencies:
       '@vitest/spy': 3.2.7
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
+      msw: 2.15.0(@types/node@20.19.43)(typescript@5.9.3)
       vite: 7.3.6(@types/node@20.19.43)(jiti@2.7.0)(tsx@4.23.15)
 
   '@vitest/pretty-format@3.2.7':
@@ -5299,11 +5352,11 @@ snapshots:
       - tsx
       - yaml
 
-  vitest@3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(supports-color@7.2.0)(tsx@4.23.15):
+  vitest@3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@26.1.0(supports-color@7.2.0))(msw@2.15.0(@types/node@20.19.43)(typescript@5.9.3))(supports-color@7.2.0)(tsx@4.23.15):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/expect': 3.2.7
-      '@vitest/mocker': 3.2.7(vite@7.3.6(@types/node@20.19.43)(jiti@2.7.0)(tsx@4.23.15))
+      '@vitest/mocker': 3.2.7(msw@2.15.0(@types/node@20.19.43)(typescript@5.9.3))(vite@7.3.6(@types/node@20.19.43)(jiti@2.7.0)(tsx@4.23.15))
       '@vitest/pretty-format': 3.2.7
       '@vitest/runner': 3.2.7
       '@vitest/snapshot': 3.2.7
